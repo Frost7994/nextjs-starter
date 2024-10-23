@@ -1,0 +1,48 @@
+{
+	"RFC to generate page": {
+		"prefix": "rfcp",
+		"body": [
+			"import type {Metadata} from 'next';",
+		  	"",
+		  	"// meta",
+			"export const metadata:Metadata = {",
+			"title: 'Mediqly |', ",
+			"description: 'A platform for medical students to learn and practice medical knowledge'",
+			"};",
+			"",
+			"export default function ${TM_DIRECTORY/.*[\\\\\\/](.*)/${1:/pascalcase}/}Page() {",
+			"  return (",
+			"    <div>",
+			"      <p>${TM_DIRECTORY/.*[\\\\\\/](.*)/${1:/pascalcase}/} Page</p>",
+			"      $0",
+			"    </div>",
+			"  );",
+			"};",
+		],
+		"description": "Create a React Page Component with folder name in PascalCase, 'Page' suffix, and <p> tag"
+	},
+	
+	"RAFC to generate component": {
+		"prefix": "rafc",
+		"body": [
+			"export const ${TM_FILENAME_BASE/(^|\\-)([a-z])/${2:/upcase}/g} = () => {",
+			"  return (",
+			"    <div>",
+			"      $0",
+			"    </div>",
+			"  );",
+			"};",
+		],
+		"description": "React Arrow Function Component with kebab-case to PascalCase conversion"
+	},
+
+	"RAFC to generate utility": {
+		"prefix": "rafu",
+		"body": [
+		  "export const ${TM_FILENAME_BASE/(\\-)([a-z])/${2:/upcase}/g} = () => {",
+		  "  return null",
+		  "};",
+		],
+		"description": "React Arrow Function Component with kebab-case to camelCase conversion"
+	},
+}
