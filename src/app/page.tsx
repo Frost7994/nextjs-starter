@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 // meta
 export const metadata: Metadata = {
-  title: "Mediqly | Home",
+  title: "App | Home",
   description: "A platform for medical students to learn and practice medical knowledge",
 };
 
