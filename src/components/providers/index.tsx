@@ -4,6 +4,7 @@
 import { ReactNode, useEffect, useState } from "react";
 
 // providers
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider, useTheme } from "next-themes";
 
 // components
@@ -21,7 +22,7 @@ export const Providers = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeProvider attribute="class" enableSystem defaultTheme="dark" disableTransitionOnChange>
-      {children}
+      <SessionProvider>{children}</SessionProvider>
       <ToasterProvider />
     </ThemeProvider>
   );

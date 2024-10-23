@@ -1,8 +1,9 @@
 "use client";
 
 import { AlignRight } from "lucide-react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +13,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { cn } from "@/utils/cn";
-
 export const NavigationDropdownMenu = () => {
+  const { data: session } = useSession();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -27,18 +28,28 @@ export const NavigationDropdownMenu = () => {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">account</p>
-            <p className="text-xs leading-none text-muted-foreground">johnsmith@example.com</p>
+            <p className="text-xs leading-none text-muted-foreground">
+              {session ? session.user?.email : "johnsmith@example.com"}
+            </p>
           </div>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className={cn(
-            buttonVariants(),
-            "h-9 w-full focus:bg-primary/90 focus:text-primary-foreground"
-          )}
-        >
-          Sign in
+        <DropdownMenuItem className="focus:bg-primary/90 focus:text-primary-foreground" asChild>
+          <Button
+            className="h-9 w-full"
+            onClick={() => {
+              if (session) {
+                signOut();
+              }
+
+              if (!session) {
+                signIn();
+              }
+            }}
+          >
+            {session ? "Sign out" : "Sign in"}
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -3,7 +3,15 @@ import { config } from "dotenv";
 import { expand } from "dotenv-expand";
 import { ZodError, z } from "zod";
 
-const envSchema = z.object({});
+const envSchema = z.object({
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+
+  NEXTAUTH_URL: z.string().url(),
+  NEXTAUTH_SECRET: z.string(),
+
+  NEON_DATABASE_URL: z.string().url(),
+});
 
 expand(config({ path: ".env.local" }));
 
