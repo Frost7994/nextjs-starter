@@ -1,3 +1,150 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "prettier"
+  ],
+  "plugins": [
+    "check-file",
+    "boundaries"
+  ],
+  "settings": {
+    "boundaries/include": [
+      "src/**/*"
+    ],
+    "boundaries/elements": [
+      {
+        "mode": "full",
+        "type": "shared",
+        "pattern": [
+          "src/components/**/*",
+          "src/config/**/*",
+          "src/data/**/*",
+          "src/hooks/**/*",
+          "src/lib/**/*",
+          "src/stores/**/*",
+          "src/styles/**/*",
+          "src/types/**/*",
+          "src/utils/**/*"
+        ]
+      },
+      {
+        "mode": "full",
+        "type": "feature",
+        "capture": [
+          "featureName"
+        ],
+        "pattern": [
+          "src/features/*/**/*"
+        ]
+      },
+      {
+        "mode": "full",
+        "type": "app",
+        "capture": [
+          "_",
+          "fileName"
+        ],
+        "pattern": [
+          "src/app/**/*"
+        ]
+      },
+      {
+        "mode": "full",
+        "type": "neverImport",
+        "pattern": [
+          "src/*"
+        ]
+      }
+    ]
+  },
+  "rules": {
+    "prefer-arrow-callback": [
+      "error"
+    ],
+    "prefer-template": [
+      "error"
+    ],
+    "semi": [
+      "error"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/*.{ts,tsx}": "KEBAB_CASE"
+      },
+      {
+        "ignoreMiddleExtensions": true
+      }
+    ],
+    "check-file/folder-naming-convention": [
+      "error",
+      {
+        "src/**/!^[.": "KEBAB_CASE"
+      }
+    ],
+    "boundaries/no-unknown": [
+      "error"
+    ],
+    "boundaries/no-unknown-files": [
+      "error"
+    ],
+    "boundaries/element-types": [
+      "error",
+      {
+        "default": "disallow",
+        "rules": [
+          {
+            "from": [
+              "shared"
+            ],
+            "allow": [
+              "shared"
+            ]
+          },
+          {
+            "from": [
+              "feature"
+            ],
+            "allow": [
+              "shared",
+              [
+                "feature",
+                {
+                  "featureName": "${from.featureName}"
+                }
+              ]
+            ]
+          },
+          {
+            "from": [
+              "app",
+              "neverImport"
+            ],
+            "allow": [
+              "shared",
+              "feature"
+            ]
+          },
+          {
+            "from": [
+              "app"
+            ],
+            "allow": [
+              [
+                "app",
+                {
+                  "fileName": "*.css"
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
