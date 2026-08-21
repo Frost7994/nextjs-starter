@@ -9,6 +9,8 @@ module.exports = {
         //
         "ai",
         "ui",
+        "stores",
+        "env",
         //
         "config",
         //
@@ -23,4 +25,4 @@ module.exports = {
       ],
     ],
   },
-}
+};
