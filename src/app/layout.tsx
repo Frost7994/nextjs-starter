@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -13,6 +14,14 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
+
+export const metadata: Metadata = {
+  title: {
+    default: "Starter Template",
+    template: "Starter Template | %s",
+  },
+  description: "A starter template for Next.js 14 with TailwindCSS and Shadcn UI.",
+};
 
 export default function RootLayout({
   children,
